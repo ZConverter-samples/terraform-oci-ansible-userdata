@@ -1,0 +1,132 @@
+{
+    "generate" : {
+        "cloud_platform" : "oci",
+        "provider" : {
+            "tenancy_ocid" : "ocid1.tenancy.oc1..~~~~",
+            "user_ocid" : "ocid1.user.oc1..~~~~",
+            "fingerprint" : "~~~~",
+            "region" : "ap-seoul-1",
+            "private_key_path" : "./~~~~"
+        },
+        "vm_info" : {
+            "vm_name" : "ansible-test-client",
+            "compartment_ocid" : null,
+            "OS" : {
+                "OS_name" : "CentOS",
+                "OS_version" : "7"
+            },
+            "instance_type" : {
+                "instance_type_name" : "VM.Standard.E4.Flex",
+                "instance_cpus" : 2,
+                "instance_memory_in_gbs" : 4
+            },
+            "ssh_public_keys" : {
+                "ssh_public_key" : "ssh-rsa ~~~~",
+                "ssh_public_key_file" : null
+            },
+            "network_interface" : {
+                "subnet_ocid" : "ocid1.subnet.oc1.~~~~",
+                "create_security_group_rules" : [
+                    {
+                        "direction" : "ingress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_max" : "22",
+                        "port_range_min" : "22",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "ingress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_max" : "139",
+                        "port_range_min" : "139",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "ingress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_max" : "445",
+                        "port_range_min" : "445",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "ingress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_max" : "5985",
+                        "port_range_min" : "5985",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "ingress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_min" : "3389",
+                        "port_range_max" : "3389",
+                        "remote_ip_prefix" : "218.145.116.162/32"
+                    },
+                    {
+                        "direction" : "ingress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "icmp",
+                        "type" : "3",
+                        "code" : "4",
+                        "remote_ip_prefix" : "218.145.116.162/32"
+                    },
+                    {
+                        "direction" : "egress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "udp",
+                        "port_range_min" : "33389",
+                        "port_range_max" : "33389",
+                        "remote_ip_prefix" : "218.145.116.162/32"
+                    },
+                    {
+                        "direction" : "egress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "icmp",
+                        "type" : "3",
+                        "code" : "4",
+                        "remote_ip_prefix" : "218.145.116.162/32"
+                    },
+                    {
+                        "direction" : "egress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_min" : "22",
+                        "port_range_max" : "22",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "egress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_min" : "445",
+                        "port_range_max" : "445",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "egress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_min" : "139",
+                        "port_range_max" : "139",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    },
+                    {
+                        "direction" : "egress",
+                        "ethertype" : "IPv4",
+                        "protocol" : "tcp",
+                        "port_range_min" : "5985",
+                        "port_range_max" : "5985",
+                        "remote_ip_prefix" : "0.0.0.0/0"
+                    }
+                ]
+            },
+            "user_data_file_path" : "./linux_client_setup.sh",
+            "additional_volumes" : [50]
+        }
+    }
+}
