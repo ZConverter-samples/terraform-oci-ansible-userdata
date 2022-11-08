@@ -31,12 +31,12 @@ elif [ "$1" == "apply" ]; then
         terraform -chdir=oci-test-ansible-server/ apply -var-file=oci_terraform_ansible_server.json -auto-approve
     elif [ $num -eq 2 ]; then
         read -p "Enter the server ip: " ip
-    
+        sed -r 's/((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])/$ip/g ./oci-test-ansible-client-centos/linux_client_setup.sh'
         terraform -chdir=oci-test-ansible-client-centos/ init
         terraform -chdir=oci-test-ansible-client-centos/ apply -var-file=oci_terraform_ansible_client_CentOS.json -auto-approve
     elif [ $num -eq 3 ]; then
         read -p "Enter the server ip: " ip
-        
+        sed -r 's/((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])/$ip/g ./oci-test-ansible-client-windows/windows_client_setup.ps1'
         terraform -chdir=oci-test-ansible-client-windows/ init
         terraform -chdir=oci-test-ansible-client-windows/ apply -var-file=oci_terraform_ansible_client_Windows.json -auto-approve
     else
