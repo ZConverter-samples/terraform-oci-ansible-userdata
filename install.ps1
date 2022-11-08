@@ -43,7 +43,7 @@ elseif ($args[0] -like "apply")
     {
         # Server IP
         $IP = Read-Host "Enter the server ip: "
-        (Get-Content .\oci-test-ansible-client-centos\linux_client_setup.sh) | ForEach-Object{$_ -Replace ('(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]).', $IP)} | Set-Content .\oci-test-ansible-client-centos\linux_client_setup.sh -Encoding ascii
+        (Get-Content .\oci-test-ansible-client-centos\linux_client_setup.sh) | ForEach-Object{$_ -Replace ('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', $IP)} | Set-Content .\oci-test-ansible-client-centos\linux_client_setup.sh -Encoding ascii
         # Excute
         .\terraform.exe -chdir=oci-test-ansible-client-centos/ init
         .\terraform.exe -chdir=oci-test-ansible-client-centos/ apply --var-file=oci_terraform_ansible_client_CentOS.json -auto-approve
@@ -52,7 +52,7 @@ elseif ($args[0] -like "apply")
     {
         # Server IP
         $IP = Read-Host "Enter the server ip: "
-        (Get-Content .\oci-test-ansible-client-windows\windows_client_setup.ps1) | ForEach-Object{$_ -Replace ('(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]).', $IP)} | Set-Content .\oci-test-ansible-client-windows\windows_client_setup.ps1 -Encoding ascii
+        (Get-Content .\oci-test-ansible-client-windows\windows_client_setup.ps1) | ForEach-Object{$_ -Replace ('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', $IP)} | Set-Content .\oci-test-ansible-client-windows\windows_client_setup.ps1 -Encoding ascii
         # Excute
         .\terraform.exe -chdir=oci-test-ansible-client-windows/ init
         .\terraform.exe -chdir=oci-test-ansible-client-windows/ apply --var-file=oci_terraform_ansible_client_Windows.json -auto-approve
