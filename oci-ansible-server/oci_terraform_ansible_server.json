@@ -21,7 +21,7 @@
                 "instance_memory_in_gbs" : 4
             },
             "ssh_public_keys" : {
-                "ssh_public_key" : "ssh-rsa ~~~~",
+                "ssh_public_key" : "",
                 "ssh_public_key_file" : null
             },
             "network_interface" : {
