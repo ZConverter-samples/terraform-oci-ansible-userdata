@@ -10,14 +10,17 @@ if ($args[0] -like "destroy")
     if ( $num -eq 1 )
     {
         .\terraform.exe -chdir=oci-ansible-server/ destroy --var-file=oci_terraform_ansible_server.json -auto-approve
+        rm -Recurse -Force .\oci-ansible-server/terraform.tfstate
     }
     elseif ( $num -eq 2 )
     {
         .\terraform.exe -chdir=oci-ansible-client-centos/ destroy --var-file=oci_terraform_ansible_client_CentOS.json -auto-approve
+        rm -Recurse -Force .\oci-ansible-client-centos/terraform.tfstate
     }
     elseif ( $num -eq 3 )
     {
         .\terraform.exe -chdir=oci-ansible-client-windows/ destroy --var-file=oci_terraform_ansible_client_Windows.json -auto-approve
+        rm -Recurse -Force .\oci-ansible-client-windows/terraform.tfstate
     }
     else
     {
@@ -71,7 +74,7 @@ elseif ($args[0] -like "apply")
         $fingerprint = Read-Host "Enter the fingerprint "
         (Get-Content .\oci-ansible-server\oci_terraform_ansible_server.json) | ForEach-Object{$_ -Replace ('"fingerprint" : "~~~~"', (Write-Output '"fingerprint" : '$fingerprint))} | Set-Content .\oci-ansible-server\oci_terraform_ansible_server.json -Encoding ascii
         (Get-Content .\oci-ansible-client-centos\oci_terraform_ansible_client_CentOS.json) | ForEach-Object{$_ -Replace ('"fingerprint" : "~~~~"', (Write-Output '"fingerprint" : '$fingerprint))} | Set-Content .\oci-ansible-client-centos\oci_terraform_ansible_client_CentOS.json -Encoding ascii
-        (Get-Content .\oci-ansible-client-windows\oci_terraform_ansible_client_Windows.json) | ForEach-Object{$_ -Replace ('"fingerprint" : "~~~~"', (Write-Output 'fingerprint" : '$fingerprint))}| Set-Content .\oci-ansible-client-windows\oci_terraform_ansible_client_Windows.json -Encoding ascii
+        (Get-Content .\oci-ansible-client-windows\oci_terraform_ansible_client_Windows.json) | ForEach-Object{$_ -Replace ('"fingerprint" : "~~~~"', (Write-Output '"fingerprint" : '$fingerprint))}| Set-Content .\oci-ansible-client-windows\oci_terraform_ansible_client_Windows.json -Encoding ascii
         $region = Read-Host "Enter the region "
         (Get-Content .\oci-ansible-server\oci_terraform_ansible_server.json) | ForEach-Object{$_ -Replace ('"region" : "ap-seoul-1"', (Write-Output '"region" : '$region))} | Set-Content .\oci-ansible-server\oci_terraform_ansible_server.json -Encoding ascii
         (Get-Content .\oci-ansible-client-centos\oci_terraform_ansible_client_CentOS.json) | ForEach-Object{$_ -Replace ('"region" : "ap-seoul-1"', (Write-Output '"region" : '$region))} | Set-Content .\oci-ansible-client-centos\oci_terraform_ansible_client_CentOS.json -Encoding ascii
