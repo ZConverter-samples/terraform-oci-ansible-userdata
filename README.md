@@ -184,7 +184,7 @@ Prepare the info needed to run the script.
     
    ***[./oci-ansible-server/server_setup.sh](https://github.com/ZConverter-samples/terraform-oci-ansible-userdata/blob/main/oci-ansible-server/server_setup.sh)***
    
-   In the code below, type your ```private-key``` in the ```"Enter the private-key"```.
+   In the code below, replace your ```private-key``` in the ```"Enter the private-key"```.
 
    ```
    #!/bin/bash
