@@ -6,7 +6,7 @@ if ($args[0] -like "destroy")
     2. Linux client
     3. Windows client
     ---------------------------------------"
-    $num = Read-Host "Select number: "
+    $num = Read-Host "Select number "
     if ( $num -eq 1 )
     {
         .\terraform.exe -chdir=oci-ansible-server/ destroy --var-file=oci_terraform_ansible_server.json -auto-approve
@@ -36,7 +36,7 @@ elseif ($args[0] -like "apply")
     3. Windows client
     4. Initial setup
     ---------------------------------------"
-    $num = Read-Host "Select number: "
+    $num = Read-Host "Select number "
 
     if ( $num -eq 1 )
     {
@@ -46,7 +46,7 @@ elseif ($args[0] -like "apply")
     elseif ( $num -eq 2 )
     {
         # Server IP
-        $IP = Read-Host "Enter the server ip: "
+        $IP = Read-Host "Enter the server ip "
         (Get-Content .\oci-ansible-client-centos\linux_client_setup.sh) | ForEach-Object{$_ -Replace ('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', $IP)} | Set-Content .\oci-ansible-client-centos\linux_client_setup.sh -Encoding ascii
         # Excute
         .\terraform.exe -chdir=oci-ansible-client-centos/ init
@@ -55,7 +55,7 @@ elseif ($args[0] -like "apply")
     elseif ( $num -eq 3 )
     {
         # Server IP
-        $IP = Read-Host "Enter the server ip: "
+        $IP = Read-Host "Enter the server ip "
         (Get-Content .\oci-ansible-client-windows\windows_client_setup.ps1) | ForEach-Object{$_ -Replace ('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)', $IP)} | Set-Content .\oci-ansible-client-windows\windows_client_setup.ps1 -Encoding ascii
         # Excute
         .\terraform.exe -chdir=oci-ansible-client-windows/ init
@@ -87,6 +87,8 @@ elseif ($args[0] -like "apply")
         (Get-Content .\oci-ansible-server\oci_terraform_ansible_server.json) | ForEach-Object{$_ -Replace ('"subnet_ocid" : "ocid1.subnet.oc1.~~~~"', (Write-Output '"subnet_ocid" : '$subnet_ocid))} | Set-Content .\oci-ansible-server\oci_terraform_ansible_server.json -Encoding ascii
         (Get-Content .\oci-ansible-client-centos\oci_terraform_ansible_client_CentOS.json) | ForEach-Object{$_ -Replace ('"subnet_ocid" : "ocid1.subnet.oc1.~~~~"', (Write-Output '"subnet_ocid" : '$subnet_ocid))} | Set-Content .\oci-ansible-client-centos\oci_terraform_ansible_client_CentOS.json -Encoding ascii
         (Get-Content .\oci-ansible-client-windows\oci_terraform_ansible_client_Windows.json) | ForEach-Object{$_ -Replace ('"subnet_ocid" : "ocid1.subnet.oc1.~~~~"', (Write-Output '"subnet_ocid" : '$subnet_ocid))} | Set-Content .\oci-ansible-client-windows\oci_terraform_ansible_client_Windows.json -Encoding ascii
+        New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
+        -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
     }
     else
     {
